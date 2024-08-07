@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.core.exceptions import ImproperlyConfigured
+
+# SECRET_KEY 설정
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# SECRET_KEY가 설정되지 않았을 경우 에러 발생
+if not SECRET_KEY:
+    raise ImproperlyConfigured("SECRET_KEY 환경 변수가 설정되지 않았습니다.")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
